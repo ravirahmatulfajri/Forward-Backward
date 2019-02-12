@@ -61,3 +61,8 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+.idea/Forward-Backward.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
