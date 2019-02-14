@@ -21,6 +21,11 @@ obs_model_without_umbrella = np.array([[0.1, 0.0], [0.0, 0.8]])
 # The vector input is the vector to be normalized.
 # Expected form is [a, b], or longer.
 def normalize(vector, endsum=1):
+    """
+    :param vector: The vector that is to be normalized, as in have the sum of its values set to a given value
+    :param endsum: Default value is one, as this method is mostly used to make vectors stochastic.
+    :return:
+    """
     vector_element_sum = 0
     for element in vector:
         vector_element_sum += element
@@ -37,7 +42,23 @@ def normalize(vector, endsum=1):
 # Works its way back to an initial probability vector, in this case [0.5, 0.5]
 # The transition model used in this specific case will always be the one created at the top of the file
 def forward(transition_model, obs_model, previous_forward_message):
+    """
+    :param transition_model: The transitional model used, in this case a 2x2 matrix
+    :param obs_model: The observational model used, in this case a 2x2 matrix containing the probabilities for the given observation
+    :param previous_forward_message: The previous forward message, in this case it is the previous vector in the HMM
+    """
     next_state_vector = obs_model.dot(transition_model.dot(previous_forward_message))
     return normalize(next_state_vector)
 
+
+# Backward algorithm, runs backwards to compute the smoothed P(X_k | e_1:t)
+#
+def backward(transition_model, obs_model, previous_backward_message):
+    """
+    :param transition_model: The transitional model used, in this case a 2x2 matrix
+    :param obs_model: The observational model used, in this case a 2x2 matrix containing the probabilities for the given observation
+    :param previous_backward_message: The previous backward message, in this case it is the next vector in the HMM
+    """
+    next_state_vector = obs_model.dot(transition_model.dot(previous_backward_message))
+    return normalize(next_state_vector)
 
