@@ -29,5 +29,7 @@ def normalize(vector, endsum):
 
     return_vector = []
     for i in range(len(vector)):
-        return_vector[i] = vector[i] * unit_to_divide_by
+        return_vector.append(vector[i] / unit_to_divide_by)
     return return_vector
+
+print(normalize([40,10], 1))
