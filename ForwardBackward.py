@@ -20,7 +20,7 @@ obs_model_without_umbrella = np.array([[0.1, 0.0], [0.0, 0.8]])
 # input used here will be 1, but I have set the option for other values
 # The vector input is the vector to be normalized.
 # Expected form is [a, b], or longer.
-def normalize(vector, endsum):
+def normalize(vector, endsum=1):
     vector_element_sum = 0
     for element in vector:
         vector_element_sum += element
@@ -32,4 +32,12 @@ def normalize(vector, endsum):
         return_vector.append(vector[i] / unit_to_divide_by)
     return return_vector
 
-print(normalize([40,10], 1))
+
+# Forward algorithm, used to recursively filter the distribution
+# Works its way back to an initial probability vector, in this case [0.5, 0.5]
+# The transition model used in this specific case will always be the one created at the top of the file
+def forward(transition_model, obs_model, previous_forward_message):
+    next_state_vector = obs_model.dot(transition_model.dot(previous_forward_message))
+    return normalize(next_state_vector)
+
+
