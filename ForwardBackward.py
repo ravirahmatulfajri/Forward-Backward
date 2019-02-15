@@ -6,13 +6,19 @@ import numpy as np
 
 alpha_one = None
 # Transitional model:
-transitional_model = np.array([[0.7, 0.3], [0.3, 0.7]])
+transitional_model = np.array([[0.7, 0.3],
+                               [0.3, 0.7]])
 
 # Observational model where an umbrella has been observed:
-obs_model_with_umbrella = np.array([[0.9, 0.0], [0.0, 0.2]])
+obs_model_with_umbrella = np.array([[0.9, 0.0],
+                                    [0.0, 0.2]])
 
 # Observational model where a distinct lack of an umbrella has been observed:
-obs_model_without_umbrella = np.array([[0.1, 0.0], [0.0, 0.8]])
+obs_model_without_umbrella = np.array([[0.1, 0.0],
+                                       [0.0, 0.8]])
+
+# Observations from task, only to be used if algorithm is applied to specific task
+evidence_list_from_task = [True, True, False, True, True]
 
 
 # Normalization function. As per the textbook description of the task a
@@ -58,7 +64,7 @@ def test_forward_algorithm(evidence_list=[True, True, False, True, True]):
     pX2_given_e1e2 = forward(transitional_model, obs_model_with_umbrella, pX1_given_e1)
     print("b) part 1", pX1_given_e1, "\n", pX2_given_e1e2, "\n")
 
-    ##Task b) part 2
+    # Task b) part 2
     prev_message = [0.5, 0.5]
     print("b) part 2")
     for i in range(5):
@@ -78,34 +84,44 @@ def backward(transition_model, obs_model, previous_backward_message):
     :param previous_backward_message: The previous backward message, in this case it is the next vector in the HMM
     """
     next_state_vector = obs_model.dot(transition_model.dot(previous_backward_message))
-    return normalize(next_state_vector)
+    return next_state_vector
 
 
-def test_backward_algorithm():
-    print("kappa")
-
-
-def forward_backward(transitional_model, obs_model, prior=[0.5, 0.5], evidence_list=[True, True, False, True, True]):
+# Forward-Backward algorithm, first filters all the vectors, then runs backwards smoothing all the vectors
+def forward_backward(transition_model, evidence_list=[True, True, False, True, True], prior=[0.5, 0.5]):
+    """
+    :param transitional_model: Likelyhood matrix
+    :param prior: initial value, in this case it will be [0.5, 0.5]
+    :param evidence_list: The actual occurances, in our specific case: [True, True, False, True, True]
+    :return: Returns a list containing the smoothed vectors corresponding to this occurance
+    """
     fv = [prior]  # forward vector
     b = [1, 1]  # backward vector, init all ones
     sv = []  # Smooth vector
+    N = len(evidence_list)  # number of events
     # iterates through the values and filters them using the forward algorithm
     for i in range(len(evidence_list)):
-        if obs_model[i]:
-            fv.append(forward(transitional_model, obs_model_with_umbrella))
+        if evidence_list[i]:
+            fv.append(forward(transition_model, obs_model_with_umbrella, fv[i]))
         else:
-            fv.append(forward(transitional_model, obs_model_without_umbrella))
-
+            fv.append(forward(transition_model, obs_model_without_umbrella, fv[i]))
     # iterates backwards from the most recent evidence, smoothing the values
-    for i in range(1, len(evidence_list) + 1, -1):
-        sv.append(normalize(np.asarray(fv[i]) * np.asarray(b)))
+    for i in range(N + 1):
+        print("b at step ", i + 1, b)
+        # fv is now n + 1 long, while sv will reach a length of n
+        # the length of evidence list is n
+        sv.append(normalize(np.asarray(fv[N - i]) * np.asarray(b)))
         # change the value of b to continue smoothing backwards
-        if obs_model[i]:
-            b = backward(transitional_model, obs_model_with_umbrella)
+        if evidence_list[N - i - 1]:
+            b = backward(transition_model, obs_model_with_umbrella, b)
         else:
-            b = backward(transitional_model, obs_model_without_umbrella)
-    return sv
+            b = backward(transition_model, obs_model_without_umbrella, b)
+    return  # sv
 
 
-test_forward_algorithm()
-print(np.asarray([1,2]) * np.asarray([1,2]))
+def test_forward_backward_algorithm():
+    # Task c) part 1; calculate P(X1 | e1:e2))
+    forward_backward(transitional_model, evidence_list_from_task)
+
+
+test_forward_backward_algorithm()
