@@ -51,24 +51,22 @@ def forward(transition_model, obs_model, previous_forward_message):
     return normalize(next_state_vector)
 
 
-def test_forward_algorithm():
+def test_forward_algorithm(evidence_list=[True, True, False, True, True]):
     # Task b) part 1
     p_X0 = [0.5, 0.5]
     pX1_given_e1 = forward(transitional_model, obs_model_with_umbrella, p_X0)
     pX2_given_e1e2 = forward(transitional_model, obs_model_with_umbrella, pX1_given_e1)
-    print(pX1_given_e1, "\n", pX2_given_e1e2)
+    print("b) part 1", pX1_given_e1, "\n", pX2_given_e1e2, "\n")
 
     ##Task b) part 2
-    forward_test_list = [True, True, False, True, True]
     prev_message = [0.5, 0.5]
+    print("b) part 2")
     for i in range(5):
-        if forward_test_list[i]:
+        if evidence_list[i]:
             prev_message = forward(transitional_model, obs_model_with_umbrella, prev_message)
         else:
             prev_message = forward(transitional_model, obs_model_without_umbrella, prev_message)
         print(prev_message)
-
-
 
 
 # Backward algorithm, runs backwards to compute the smoothed P(X_k | e_1:t)
@@ -81,6 +79,26 @@ def backward(transition_model, obs_model, previous_backward_message):
     """
     next_state_vector = obs_model.dot(transition_model.dot(previous_backward_message))
     return normalize(next_state_vector)
+
+
+def test_backward_algorithm():
+    print("kappa")
+
+
+def forward_backward(transitional_model, obs_model, prior=[0.5, 0.5], evidence_list=[True, True, False, True, True]):
+    fv = [prior]  # forward vector
+    b = [1, 1]  # backward vector, init all ones
+    sv = []  # Smooth vector
+    # iterates through the values and filters them using the forward algorithm
+    for i in range(len(evidence_list)):
+        if obs_model[i]:
+            fv.append(forward(transitional_model, obs_model_with_umbrella))
+        else:
+            fv.append(forward(transitional_model, obs_model_without_umbrella))
+
+    # iterates backwards from the most recent evidence, smoothing the values
+    for i in range(0, len(evidence_list), -1):
+        sv.append()
 
 
 test_forward_algorithm()
