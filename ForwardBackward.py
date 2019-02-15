@@ -97,8 +97,15 @@ def forward_backward(transitional_model, obs_model, prior=[0.5, 0.5], evidence_l
             fv.append(forward(transitional_model, obs_model_without_umbrella))
 
     # iterates backwards from the most recent evidence, smoothing the values
-    for i in range(0, len(evidence_list), -1):
-        sv.append()
+    for i in range(1, len(evidence_list) + 1, -1):
+        sv.append(normalize(np.asarray(fv[i]) * np.asarray(b)))
+        # change the value of b to continue smoothing backwards
+        if obs_model[i]:
+            b = backward(transitional_model, obs_model_with_umbrella)
+        else:
+            b = backward(transitional_model, obs_model_without_umbrella)
+    return sv
 
 
 test_forward_algorithm()
+print(np.asarray([1,2]) * np.asarray([1,2]))
