@@ -1,10 +1,5 @@
 import numpy as np
 
-# alpha_one is given by the following equation:
-# alpha_one(X_1) = P(X_1,e_1) = P(X_1)*P(e_1|X_1)
-# In our case; P(X_1)*P(e_1|X_1) = (0.5, 0,5) * (0.818, 0.182)
-
-alpha_one = None
 # Transitional model:
 transitional_model = np.array([[0.7, 0.3],
                                [0.3, 0.7]])
@@ -83,7 +78,7 @@ def backward(transition_model, obs_model, previous_backward_message):
     :param obs_model: The observational model used, in this case a 2x2 matrix containing the probabilities for the given observation
     :param previous_backward_message: The previous backward message, in this case it is the next vector in the HMM
     """
-    next_state_vector = obs_model.dot(transition_model.dot(previous_backward_message))
+    next_state_vector = transition_model.dot(obs_model.dot(previous_backward_message))
     return next_state_vector
 
 
@@ -106,22 +101,21 @@ def forward_backward(transition_model, evidence_list=[True, True, False, True, T
         else:
             fv.append(forward(transition_model, obs_model_without_umbrella, fv[i]))
     # iterates backwards from the most recent evidence, smoothing the values
-    for i in range(N + 1):
-        print("b at step ", i + 1, b)
-        # fv is now n + 1 long, while sv will reach a length of n
-        # the length of evidence list is n
+    for i in range(N):
+        print("b at step ", N - i + 1, b)  # This line is added to show the progression of the backward algorithm.
         sv.append(normalize(np.asarray(fv[N - i]) * np.asarray(b)))
         # change the value of b to continue smoothing backwards
         if evidence_list[N - i - 1]:
             b = backward(transition_model, obs_model_with_umbrella, b)
         else:
             b = backward(transition_model, obs_model_without_umbrella, b)
-    return  # sv
+    return  sv
 
 
 def test_forward_backward_algorithm():
     # Task c) part 1; calculate P(X1 | e1:e2))
-    forward_backward(transitional_model, evidence_list_from_task)
-
+    print(forward_backward(transitional_model, evidence_list_from_task[0:2])[-1])
+    # task c) part 2; calculate P(X1 | e1:e2)
+    print(forward_backward(transitional_model, evidence_list_from_task)[-1])
 
 test_forward_backward_algorithm()
