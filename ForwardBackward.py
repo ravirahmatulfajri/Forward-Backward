@@ -109,7 +109,7 @@ def forward_backward(transition_model, evidence_list=[True, True, False, True, T
             b = backward(transition_model, obs_model_with_umbrella, b)
         else:
             b = backward(transition_model, obs_model_without_umbrella, b)
-    return  sv
+    return sv
 
 
 def test_forward_backward_algorithm():
@@ -118,4 +118,11 @@ def test_forward_backward_algorithm():
     # task c) part 2; calculate P(X1 | e1:e2)
     print(forward_backward(transitional_model, evidence_list_from_task)[-1])
 
-test_forward_backward_algorithm()
+
+def main():
+    test_forward_algorithm()
+    test_forward_backward_algorithm()
+
+
+if __name__ == "__main__":
+    main()
