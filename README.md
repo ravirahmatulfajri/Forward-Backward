@@ -19,14 +19,5 @@ The observable variable is whether or not the protagonists boss has an ubrella.
 
 The dynamic/transitional model is presented as matrices in the code.
 
-T = 
-| 1 | 1 |
-| 2 | 1 |
 
-    
-O<sub>true</sub> = [0.9  0]
-                   [0  0.2]
-                
-    
-O<sub>false</sub> = [0.1  0]<br>
-                     [0  0.2]
+The assumptions in this model are for that both rain and not rain are equally likely at the initial state, which is not necessarily true. Further one could argue that this is very simplified view of how weather operates in the real world. The model assumes constant transitional matrices as well as a very predictable boss.
