@@ -12,3 +12,21 @@ If it is raining, there is a 90% chance his boss has an umbrella with him, if it
 Given 50-50 odds the first day.
 
 
+Part a):
+The unobservable variable is the weather, or to be more precise, whether or not it is raining.
+
+The observable variable is whether or not the protagonists boss has an ubrella.
+
+The dynamic/transitional model is presented as matrices in the code.
+
+T = 
+| 1 | 1 |
+| 2 | 1 |
+
+    
+O<sub>true</sub> = [0.9  0]
+                   [0  0.2]
+                
+    
+O<sub>false</sub> = [0.1  0]<br>
+                     [0  0.2]
