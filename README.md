@@ -15,7 +15,7 @@ Given 50-50 odds the first day.
 Part a):
 The unobservable variable is the weather, or to be more precise, whether or not it is raining.
 
-The observable variable is whether or not the protagonists boss has an ubrella.
+The observable variable is whether or not the protagonist's boss has an umbrella.
 
 The dynamic/transitional model is presented as matrices in the code.
 
