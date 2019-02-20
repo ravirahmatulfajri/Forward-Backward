@@ -114,9 +114,13 @@ def forward_backward(transition_model, evidence_list=[True, True, False, True, T
 
 def test_forward_backward_algorithm():
     # Task c) part 1; calculate P(X1 | e1:e2))
-    print(forward_backward(transitional_model, evidence_list_from_task[0:2])[-1])
-    # task c) part 2; calculate P(X1 | e1:e2)
-    print(forward_backward(transitional_model, evidence_list_from_task)[-1])
+    print("\n" + "c) part 1" + "\n")
+    print(forward_backward(transitional_model, evidence_list_from_task[0:2])[0])
+    print("which means that the result is as expected." + "\n")
+    # task c) part 2; calculate P(X1 | e1:e5)
+    print("c) part 2" + "\n")
+    print(forward_backward(transitional_model, evidence_list_from_task)[0])
+    print("which means that the result is as expected." + "\n")
 
 
 def main():
