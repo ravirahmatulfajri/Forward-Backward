@@ -1,23 +1,33 @@
+# TUGAS 1
+NAMA : RAVI RAHMATUL FAJRI
+NPM : 1184040
+KELAS : D4 TEKNIK INFORMATIKA 3A
+MATA KULIAH : SISTEM PAKAR
+DOSEN PENGAMPU : M NURKAMAL F, S.T., M.T.
+
+# forked from asksom/Forward-Backward
+
 # Forward-Backward
-Simple implementation of the forward-backward algorithm for TDT4171: Methods in AI
+Implementasu sederhana forward-backward algorithm untuk TDT4171: Methods dalam AI
 
-The Forward-Backward algorithm consists of two parts, the forward algorithm used for filtering, a process to recursively compute the joint probability of P(x<sub>t</sub>, y<sub>1:t</sub>) and
-the backward algorithm used for smoothing, a process that moves backwards to edit the probabilities to more accurate values.
+Algoritma forward-backward terdiri dari dua bagian, 
+1. algoritma forward yang digunakan untuk pemfilteran, sebuah proses untuk menghitung secara rekursif probabilitas gabungan P (x <sub> t </sub>, y <sub> 1: t </sub>) dan
+2. algoritma backward yang digunakan untuk menghaluskan, sebuah proses yang bergerak mundur untuk mengedit probabilitas menjadi nilai yang lebih akurat.
 
-The setting is as follows; a man sits in a bunker, unable to observe the outsiden world. He is curious as to whether or not it is raining outside.
-His only information about the world is seeing his boss, who is fortunate enough to not live in  the bunker, carry or not carry an umbrella.
+Settingnya adalah sebagai berikut; seorang pria duduk di bunker, tidak mampu mengamati dunia luar. Dia penasaran apakah di luar sedang hujan atau tidak.
+Informasi satu-satunya tentang dunia adalah melihat bosnya, yang cukup beruntung tidak tinggal di bunker, membawa atau tidak membawa payung.
 
-If it is raining, there is a 90% chance his boss has an umbrella with him, if it is not raining there is a 20% chance he is carrying an umbrella. There is also a 70% chance of the weather being identical as the day before.
+Jika hujan ada kemungkinan 90% bosnya membawa payung, jika tidak hujan ada peluang 20% ​​dia membawa payung. Ada juga kemungkinan 70% cuaca akan identik dengan hari sebelumnya.
 
-Given 50-50 odds the first day.
-
-
-Part a):
-The unobservable variable is the weather, or to be more precise, whether or not it is raining.
-
-The observable variable is whether or not the protagonist's boss has an umbrella.
-
-The dynamic/transitional model is presented as matrices in the code.
+Diberikan peluang 50-50 hari pertama.
 
 
-The assumptions in this model are for that both rain and not rain are equally likely at the initial state, which is not necessarily true. Further one could argue that this is very simplified view of how weather operates in the real world. The model assumes constant transitional matrices as well as a very predictable boss.
+Bagian a):
+Variabel yang tidak dapat diamati adalah cuaca, atau lebih tepatnya, apakah sedang hujan atau tidak.
+
+Variabel yang dapat diamati adalah apakah bos protagonis memiliki payung atau tidak.
+
+Model dinamis / transisi disajikan sebagai matriks dalam kode.
+
+
+Asumsi dalam model ini adalah bahwa hujan dan bukan hujan memiliki kemungkinan yang sama pada keadaan awal, yang belum tentu benar. Lebih jauh orang dapat berargumen bahwa ini adalah pandangan yang sangat disederhanakan tentang bagaimana cuaca beroperasi di dunia nyata. Model ini mengasumsikan matriks transisi konstan serta bos yang sangat dapat diprediksi.
