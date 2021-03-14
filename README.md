@@ -6,6 +6,7 @@ MATA KULIAH : SISTEM PAKAR
 DOSEN PENGAMPU : M NURKAMAL F, S.T., M.T.
 
 # forked from asksom/Forward-Backward
+https://github.com/asksom/Forward-Backward
 
 # Forward-Backward
 Implementasu sederhana forward-backward algorithm untuk TDT4171: Methods dalam AI
