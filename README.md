@@ -22,7 +22,6 @@ Jika hujan ada kemungkinan 90% bosnya membawa payung, jika tidak hujan ada pelua
 
 Diberikan peluang 50-50 hari pertama.
 
-
 Bagian a):
 Variabel yang tidak dapat diamati adalah cuaca, atau lebih tepatnya, apakah sedang hujan atau tidak.
 
