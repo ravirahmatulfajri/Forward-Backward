@@ -15,7 +15,7 @@ Algoritma forward-backward terdiri dari dua bagian,
 1. algoritma forward yang digunakan untuk pemfilteran, sebuah proses untuk menghitung secara rekursif probabilitas gabungan P (x <sub> t </sub>, y <sub> 1: t </sub>) dan
 2. algoritma backward yang digunakan untuk menghaluskan, sebuah proses yang bergerak mundur untuk mengedit probabilitas menjadi nilai yang lebih akurat.
 
-Settingnya adalah sebagai berikut; seorang pria duduk di bunker, tidak mampu mengamati dunia luar. Dia penasaran apakah di luar sedang hujan atau tidak.
+Kasusnya adalah sebagai berikut; seorang pria duduk di bunker, tidak mampu mengamati dunia luar. Dia penasaran apakah di luar sedang hujan atau tidak.
 Informasi satu-satunya tentang dunia adalah melihat bosnya, yang cukup beruntung tidak tinggal di bunker, membawa atau tidak membawa payung.
 
 Jika hujan ada kemungkinan 90% bosnya membawa payung, jika tidak hujan ada peluang 20% ​​dia membawa payung. Ada juga kemungkinan 70% cuaca akan identik dengan hari sebelumnya.
